@@ -13,6 +13,7 @@ const app = Sammy('#main', function(){
     this.get('#/logout', userController.postLogout);
 
     this.get('#/createEvent', eventController.getEventCreate);
+    this.post('#/createEvent', eventController.postEventCreate);
 });
 
 (() => {
