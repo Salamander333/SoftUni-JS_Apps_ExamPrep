@@ -1,5 +1,5 @@
 const homeController = function () {
-    const getHome = function (context) {
+    const getHome = async function (context) {
         helper.addHeaderInfo(context);
 
         if (context.loggedIn) {
@@ -9,7 +9,7 @@ const homeController = function () {
             const url = `/appdata/${storage.appKey}/events`;
             const authorizationType = 'Kinvey';
 
-            requester.get(url, authorizationType)
+            await requester.get(url, authorizationType)
                 .then(response => response.json())
                 .then(events => {
                     context.events = events;
@@ -19,8 +19,8 @@ const homeController = function () {
         context.loadPartials({
             header: "../Templates/header.hbs",
             footer: "../Templates/footer.hbs",
-            event: "../Templates/event.hbs",
-            noEvents: "../Templates/noEvents.hbs"
+            noEvents: "../Templates/noEvents.hbs",
+            event: "../Templates/event.hbs"
         }).then(function () {
             this.partial("../Templates/home.hbs");
         });
